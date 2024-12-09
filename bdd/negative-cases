@@ -1,0 +1,27 @@
+Scenario: Sending an email without a recipient
+  Given I have opened Gmail
+  When I click "Compose"
+  And I enter "Incubyte" as the subject
+  And I enter "QA test for Incubyte" as the body
+  And I leave the "To" field empty
+  And I click "Send"
+  Then an error message should appear saying "Please specify at least one recipient."
+
+Scenario: Sending an email with an invalid recipient
+  Given I have opened Gmail
+  When I click "Compose"
+  And I enter "Incubyte" as the subject
+  And I enter "QA test for Incubyte" as the body
+  And I enter "invalid-email" as the recipient
+  And I click "Send"
+  Then an error message should appear saying "Invalid email address."
+
+Scenario: Attaching an unsupported file type
+  Given I have opened Gmail
+  When I click "Compose"
+  And I attach a `.exe` file
+  And I enter "Incubyte" as the subject
+  And I enter "QA test for Incubyte" as the body
+  And I enter a valid recipient
+  And I click "Send"
+  Then an error message should appear saying "Unsupported file type."
