@@ -1,0 +1,23 @@
+Scenario: Sending an email with an empty body and subject
+  Given I have opened Gmail
+  When I click "Compose"
+  And I enter a valid recipient
+  And I leave the subject and body fields empty
+  And I click "Send"
+  Then the email should be sent successfully.
+
+Scenario: Sending an email with a very long subject
+  Given I have opened Gmail
+  When I click "Compose"
+  And I enter a subject with 500 characters
+  And I enter a valid recipient and a body
+  And I click "Send"
+  Then the email should be sent successfully.
+
+Scenario: Sending an email with special characters in subject and body
+  Given I have opened Gmail
+  When I click "Compose"
+  And I enter a valid recipient
+  And I enter a subject and body with special characters (e.g., emojis, symbols)
+  And I click "Send"
+  Then the email should be sent successfully with the special characters intact.
