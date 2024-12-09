@@ -1,0 +1,23 @@
+Scenario: Attaching a file larger than 25 MB
+  Given I have opened Gmail
+  When I click "Compose"
+  And I attach a file larger than 25 MB
+  And I enter a valid recipient, subject, and body
+  And I click "Send"
+  Then an error message should appear saying "Attachment exceeds the maximum size limit."
+
+Scenario: Sending an email with too many recipients
+  Given I have opened Gmail
+  When I click "Compose"
+  And I add more than the allowed number of recipients (e.g., 500)
+  And I enter a subject and body
+  And I click "Send"
+  Then an error message should appear saying "Too many recipients."
+
+Scenario: Sending an email with duplicate recipients
+  Given I have opened Gmail
+  When I click "Compose"
+  And I add the same recipient multiple times in the "To" field
+  And I enter a subject and body
+  And I click "Send"
+  Then the email should be sent successfully, ignoring duplicate recipients.
